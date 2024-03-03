@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sinatra-auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sinatra-auth
+  template:
+    metadata:
+      labels:
+        app: sinatra-auth
+    spec:
+      containers:
+      - name: sinatra-auth-container
+        image: forsaken1/auth.rb:latest
+        env:
+        - name: DATABASE_URL
+          value: "db://user:password@postgres/auth_service"
+        ports:
+        - containerPort: 4567
