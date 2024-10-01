@@ -1,0 +1,7 @@
+name: auth
+version: 0.1.0
+dependencies:
+  jwt:
+    github: crystal-community/jwt
+  dotenv:
+    github: gdotdesign/cr-dotenv
