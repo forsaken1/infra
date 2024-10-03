@@ -1,0 +1,16 @@
+default: &default
+  host: localhost
+  user: postgres
+  adapter: postgres
+
+development:
+  <<: *default
+  db: users_development
+
+test:
+  <<: *default
+  db: users_test
+
+production:
+  <<: *default
+  db: users_production
