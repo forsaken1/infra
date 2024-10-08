@@ -7,13 +7,17 @@ class User < Jennifer::Model::Base
   mapping(
     id: Primary32,
     email: String,
-    password_hash: String,
-    is_admin: Bool,
-    created_at: Time,
-    updated_at: Time
+    password: { type: String?, virtual: true },
+    password_hash: String?,
+    is_admin: { type: Bool, default: false },
+    created_at: { type: Time, null: true },
+    updated_at: { type: Time, null: true }
   )
 
-  def password=(password : String)
-    self.password_hash = Crypto::Bcrypt.new(password, "123").digest.to_s # add salt
+  before_create :crypt_password
+
+  def crypt_password
+    salt = "1234567890123456789012345"
+    self.password_hash = Crypto::Bcrypt.new(self.password.as(String), salt).to_s
   end
 end

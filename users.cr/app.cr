@@ -11,16 +11,18 @@ post "/users" do |env|
     env.response.status_code = 400
     env.response.print({error: "Email already exists"}.to_json)
   else
-    user = User.new(Hash(Symbol, String).new)
-    user.email = email
-    user.password = password
+    user = User.create({ email: email, password: password })
 
-    if user.save
+    if user.id
       env.response.status_code = 201
-      env.response.print({message: "User created successfully", user: user.id}.to_json)
+      env.response.print({
+        success: true,
+        message: "User created successfully",
+        user: { id: user.id, email: user.email }
+      }.to_json)
     else
       env.response.status_code = 500
-      env.response.print({error: "User creation failed"}.to_json)
+      env.response.print({success: false, error: "User creation failed"}.to_json)
     end
   end
 end
