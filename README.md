@@ -1,12 +1,10 @@
 # Infrastructure
 
-The project about how to build good distributed infrastructure with microservices from the scratch
+The project about how to build distributed infrastructure with microservices from the scratch
 
 ## Naming
 
 Directories in the root: MODULE_NAME.LANGUAGE
-
-Also I'm trying to use DDD here
 
 ## Services
 
