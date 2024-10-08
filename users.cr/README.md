@@ -2,4 +2,11 @@
 
 ## Run
 
-`crystal run app.cr`
+Make sure you have installed Crystal and Postgres
+
+```
+shards
+crystal sam.cr db:setup
+crystal sam.cr db:migrate
+crystal run app.cr
+```

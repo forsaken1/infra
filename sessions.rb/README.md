@@ -1,6 +1,8 @@
-# Auth.rb
+# Sessions service on Ruby
 
-# Build
+I used it to learn Kubernetes
+
+## Build
 
 ```bash
 docker build -t auth.rb .
