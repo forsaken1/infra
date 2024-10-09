@@ -8,19 +8,15 @@ Directories in the root: MODULE_NAME.LANGUAGE
 
 ## Services
 
-- users (see users.md)
-- sessions (see sessions.md)
-- admins (see admins.md)
-- emails (see emails.md)
+- users (see [users.md](users.md))
+- sessions (see [sessions.md](sessions.md))
+- admins (see [admins.md](admins.md))
+- emails (see [emails.md](emails.md))
 
 ## Databases
 
 - Postgres
-- Kafka
-
-## Third-party services
-
-- Sendgrid
+- Kafka (see [kafka.md](kafka.md))
 
 ## Interactions
 

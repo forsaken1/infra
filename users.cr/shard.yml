@@ -2,6 +2,8 @@ name: users_service
 version: 0.1.0
 
 dependencies:
+  crafka:
+    github: bt-opensource/crafka
   kemal:
     github: kemalcr/kemal
   jennifer:

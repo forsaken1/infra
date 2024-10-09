@@ -1,4 +1,6 @@
 require "kemal"
+require "crafka"
+
 require "./config/database"
 require "./models/user"
 
@@ -12,6 +14,9 @@ post "/users" do |env|
     env.response.print({error: "Email already exists"}.to_json)
   else
     user = User.create({ email: email, password: password })
+
+    producer = Kafka::Producer.new({"bootstrap.servers" => "localhost:9092", "broker.address.family" => "v4"})
+    producer.produce(topic: "users", payload: "new_user".to_slice)
 
     if user.id
       env.response.status_code = 201

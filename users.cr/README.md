@@ -2,7 +2,7 @@
 
 ## Run
 
-Make sure you have installed Crystal and Postgres
+Make sure you have installed Crystal, Postgres and Kafka
 
 ```
 shards
