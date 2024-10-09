@@ -1,7 +1,6 @@
 defmodule Sessions.Accounts do
   alias Sessions.Accounts.User
   alias Sessions.Repo
-  alias Bcrypt
 
   import Ecto.Query, warn: false
 

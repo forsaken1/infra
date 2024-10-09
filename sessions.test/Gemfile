@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'airborne'
+gem 'bcrypt'
 gem 'database_cleaner-sequel'
-gem 'sequel'
 gem 'pg'
+gem 'sequel'
