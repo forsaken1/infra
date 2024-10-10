@@ -1,4 +1,4 @@
-# Tests for Users service
+# Tests for Sessions service
 
 ## Run
 

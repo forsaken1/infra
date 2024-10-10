@@ -4,7 +4,7 @@ The project about how to build distributed infrastructure with microservices fro
 
 ## Naming
 
-Directories in the root: MODULE_NAME.LANGUAGE
+Directories in the root: SERVICE_NAME.LANGUAGE
 
 ## Services
 
