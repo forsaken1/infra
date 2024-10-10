@@ -16,6 +16,8 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 ## Databases
 
 - Postgres
+
+## Message brockers
 - Kafka (see [kafka.md](kafka.md))
 
 ## Interactions
