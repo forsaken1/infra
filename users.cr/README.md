@@ -5,6 +5,7 @@
 Make sure you have installed Crystal, Postgres and Kafka
 
 ```
+cp .env.example .env
 shards
 crystal sam.cr db:setup
 crystal sam.cr db:migrate
