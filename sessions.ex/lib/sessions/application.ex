@@ -15,7 +15,24 @@ defmodule Sessions.Application do
       # Start a worker by calling: Sessions.Worker.start_link(arg)
       # {Sessions.Worker, arg},
       # Start to serve requests, typically the last entry
-      SessionsWeb.Endpoint
+      SessionsWeb.Endpoint,
+      # Start consumers
+      %{
+        id: KafkaEx.ConsumerGroup,
+        start: {
+          KafkaEx.ConsumerGroup,
+          :start_link,
+          [
+            Sessions.Consumers.User,
+            "sessions",
+            ["users"],
+            [
+              heartbeat_interval: 1_000,
+              commit_interval: 1_000
+            ]
+          ]
+        }
+      }
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

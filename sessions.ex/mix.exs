@@ -41,7 +41,8 @@ defmodule Sessions.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:bcrypt_elixir, "~> 3.0"}
+      {:bcrypt_elixir, "~> 3.0"},
+      {:kafka_ex, "~> 0.12.1"}
     ]
   end
 
