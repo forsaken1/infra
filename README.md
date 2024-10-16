@@ -18,9 +18,24 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - Postgres
 
 ## Message brockers
+
 - Kafka (see [kafka.md](kafka.md))
 
 ## Interactions
 
 - users service creates an user in it's database and pushes it to kafka
 - kafka sends it to other services (sessions, admins, etc) databases
+
+## TODO
+
+- [x] Users service (Crystal)
+- [x] Sessions service (Elixir)
+- [x] Message brocker integration (Kafka)
+- [x] Tests (RSpec)
+- [ ] Integration tests (RSpec)
+- [ ] UI (React)
+- [ ] UI tests (Playwright)
+- [ ] Log collecting (ELK)
+- [ ] Metrics & Monitoring, Alerts (Zabbix, Grafana)
+- [ ] Deployment (Docker Compose, Kubernetes)
+- [ ] Infrastructure automatization (Ansible)
