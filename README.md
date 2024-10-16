@@ -35,6 +35,7 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [ ] Integration tests (RSpec)
 - [ ] UI (React)
 - [ ] UI tests (Playwright)
+- [ ] CI (Github)
 - [ ] Log collecting (ELK)
 - [ ] Metrics & Monitoring, Alerts (Zabbix, Grafana)
 - [ ] Deployment (Docker Compose, Kubernetes)
