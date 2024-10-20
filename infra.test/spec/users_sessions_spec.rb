@@ -31,6 +31,11 @@ describe 'Registration and Auhtentification' do
       expect_json(success: true)
     end.to change { Sessions::Session.count }.from(0).to(1)
 
+    token = json_body[:session][:token]
+
     # check user's data availability
+    get users_url('user'), { 'auth-token' => token }
+    expect_status(200)
+    expect_json(success: true, user: { email: 'testuser@example.com' })
   end
 end

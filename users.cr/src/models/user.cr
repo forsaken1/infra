@@ -1,11 +1,13 @@
 require "jennifer"
 require "crypto/bcrypt"
+require "uuid"
 
 class User < Jennifer::Model::Base
   with_timestamps
 
   mapping(
-    id: Primary32,
+    id: Primary64,
+    uuid: String?,
     email: String,
     password: { type: String?, virtual: true },
     password_hash: String?,
@@ -15,9 +17,13 @@ class User < Jennifer::Model::Base
   )
 
   before_create :crypt_password
+  before_create :generate_uuid
 
   def crypt_password
-    salt = "1234567890123456789012345"
-    self.password_hash = Crypto::Bcrypt.new(self.password.as(String), salt).to_s
+    self.password_hash = Crypto::Bcrypt.new(self.password.as(String), ENV["BCRYPT_SALT"]).to_s
+  end
+
+  def generate_uuid
+    self.uuid = UUID.random.to_s
   end
 end

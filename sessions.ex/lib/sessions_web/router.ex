@@ -8,6 +8,7 @@ defmodule SessionsWeb.Router do
   scope "/", SessionsWeb do
     pipe_through :api
 
+    get "/session", SessionController, :show
     resources "/sessions", SessionController, only: [:create]
   end
 end

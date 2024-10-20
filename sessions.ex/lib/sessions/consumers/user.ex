@@ -14,10 +14,14 @@ defmodule Sessions.Consumers.User do
       {status, data} = Jason.decode(message)
 
       if status == :error do
-        IO.puts("Failed to parse JSON: #{reason}")
+        IO.puts("Failed to parse JSON: #{data}")
       end
 
-      Repo.insert(%User{email: data["email"], password_hash: data["password_hash"]})
+      Repo.insert(%User{
+        uuid: data["uuid"],
+        email: data["email"],
+        password_hash: data["password_hash"]
+      })
     end
     {:async_commit, state}
   end

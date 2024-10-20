@@ -37,6 +37,7 @@ ALTER TABLE public.migration_versions OWNER TO postgres;
 
 CREATE TABLE public.users (
     id bigint NOT NULL,
+    uuid character varying(254) NOT NULL,
     email character varying(254) NOT NULL,
     password_hash character varying(254) NOT NULL,
     is_admin boolean DEFAULT false,

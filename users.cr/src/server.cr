@@ -14,7 +14,7 @@ post "/users" do |env|
   email = user_params["email"].as(String)
   password = user_params["password"].as(String)
 
-  if User.where { _email == emaily }.exists?
+  if User.where { _email == email }.exists?
     env.response.status_code = 400
     env.response.print({error: "Email already exists"}.to_json)
   else
@@ -41,10 +41,10 @@ get "/user" do |env|
 
   if user
     env.response.status_code = 200
-    env.response.print(user.to_json)
+    { success: true, user: { id: user.id, email: user.email } }.to_json
   else
     env.response.status_code = 404
-    env.response.print({error: "User not found"}.to_json)
+    { success: false, error: "User not found" }.to_json
   end
 end
 

@@ -3,7 +3,22 @@ defmodule SessionsWeb.SessionController do
 
   alias Sessions.Accounts
   alias Sessions.Accounts.Session
+  alias Sessions.Accounts.User
   alias Sessions.Repo
+
+  require Logger
+
+  def show(conn, params) do
+    token = params["token"]
+    session = Repo.get_by! Session, token: token
+    user = Repo.get! User, session.user_id
+
+    json(conn, %{
+      success: true,
+      user: %{ uuid: user.uuid, email: user.email },
+      session: %{ id: session.id, token: token }
+    })
+  end
 
   def create(conn, %{"email" => email, "password" => password}) do
     case Accounts.authenticate_user(email, password) do
@@ -17,7 +32,7 @@ defmodule SessionsWeb.SessionController do
         |> json(%{
           success: true,
           message: "Logged in successfully",
-          user: %{ id: user.id, email: user.email },
+          user: %{ uuid: user.uuid, email: user.email },
           session: %{ id: session.id, token: token }
         })
 

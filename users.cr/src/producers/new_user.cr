@@ -12,6 +12,7 @@ module Producers
 
     private def payload
       {
+        uuid: @user.uuid,
         email: @user.email,
         password_hash: @user.password_hash
       }

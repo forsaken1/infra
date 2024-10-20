@@ -3,6 +3,7 @@ defmodule Sessions.Accounts.User do
   import Ecto.Changeset
 
   schema "users" do
+    field :uuid, :string
     field :email, :string
     field :password_hash, :string
 
@@ -12,7 +13,7 @@ defmodule Sessions.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password_hash])
-    |> validate_required([:email, :password_hash])
+    |> cast(attrs, [:uuid, :email, :password_hash])
+    |> validate_required([:uuid, :email, :password_hash])
   end
 end
