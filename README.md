@@ -32,7 +32,9 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [x] Sessions service (Elixir)
 - [x] Message brocker integration (Kafka)
 - [x] Tests (RSpec)
-- [ ] Integration tests (RSpec)
+- [x] Integration tests (RSpec)
+- [ ] Admins service
+- [ ] Emails service
 - [ ] UI (React)
 - [ ] UI tests (Playwright)
 - [ ] CI (Github)
