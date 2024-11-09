@@ -2,7 +2,7 @@
 
 ## Run
 
-Make sure you have installed Elixir, Postgres, Kafka, then run:
+Make sure you have installed Elixir, Postgres, Kafka, Postgres, then run:
 
 ```
 mix setup

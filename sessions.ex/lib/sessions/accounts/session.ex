@@ -6,7 +6,7 @@ defmodule Sessions.Accounts.Session do
     field :token, :string
     field :user_id, :integer
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime, inserted_at: :created_at)
   end
 
   @doc false

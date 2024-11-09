@@ -18,10 +18,23 @@ Airborne.configure do |config|
   config.base_url = 'http://localhost:4000'
 end
 
+module Model
+  def before_create
+    self.created_at = Time.now
+    self.updated_at = Time.now
+  end
+end
+
 class User < Sequel::Model(:users)
+  include Model
+
+  def before_create
+    self.uuid = SecureRandom.uuid
+  end
 end
 
 class Session < Sequel::Model(:sessions)
+  include Model
 end
 
 describe 'User Registration and Management API' do
@@ -30,7 +43,7 @@ describe 'User Registration and Management API' do
     User.create(
       email: 'testuser@example.com',
       password_hash: BCrypt::Password.create('password123'),
-      inserted_at: Time.now,
+      created_at: Time.now,
       updated_at: Time.now
     )
 
@@ -42,7 +55,7 @@ describe 'User Registration and Management API' do
     end.to change { Session.count }.from(0).to(1)
 
     expect_status(200)
-    expect_json_types(success: :boolean, message: :string, user: { id: :integer, email: :string })
+    expect_json_types(success: :boolean, message: :string, user: { uuid: :string, email: :string })
     expect_json(success: true)
   end
 end

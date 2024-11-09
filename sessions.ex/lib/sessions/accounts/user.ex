@@ -7,7 +7,7 @@ defmodule Sessions.Accounts.User do
     field :email, :string
     field :password_hash, :string
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime, inserted_at: :created_at)
   end
 
   @doc false
