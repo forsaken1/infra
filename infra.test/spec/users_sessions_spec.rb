@@ -37,5 +37,11 @@ describe 'Registration and Auhtentification' do
     get users_url('user'), { 'auth-token' => token }
     expect_status(200)
     expect_json(success: true, user: { email: 'testuser@example.com' })
+
+    # get the data in admins service
+    get admins_url('users') # TODO: admins auth token
+    expect_status(200)
+    expect_json(success: true)
+    expect_json_sizes(collection: 1)
   end
 end

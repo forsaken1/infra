@@ -35,3 +35,7 @@ end
 def sessions_url(path)
   "http://localhost:4000/#{path}"
 end
+
+def admins_url(path)
+  "http://localhost:5001/#{path}"
+end
