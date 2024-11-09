@@ -2,6 +2,10 @@
 
 The service about admin access to data
 
+## Data
+
+Uses from users service (see [users.md](users.md))
+
 ## Methods
 
 GET /users - get all user's data

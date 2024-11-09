@@ -6,6 +6,7 @@ The service for user registration and managing user's data
 
 users
 - id
+- uuid
 - email
 - password_hash
 - is_admin

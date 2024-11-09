@@ -2,7 +2,7 @@
 
 ## Run
 
-Make sure you have installed Crystal, Postgres and Kafka
+Make sure you have installed Crystal, Postgres, Kafka and Postgres
 
 ```
 cp .env.example .env

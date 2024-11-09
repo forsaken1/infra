@@ -33,8 +33,11 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [x] Message brocker integration (Kafka)
 - [x] Tests (RSpec)
 - [x] Integration tests (RSpec)
-- [ ] Admins service
+- [x] Admins service
 - [ ] Emails service
+- [ ] Swagger docs
+- [ ] Routing
+- [ ] API Gateway
 - [ ] UI (React)
 - [ ] UI tests (Playwright)
 - [ ] CI (Github)
