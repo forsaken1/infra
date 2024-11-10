@@ -4,7 +4,7 @@ require 'sequel'
 
 RSpec.configure do |config|
   DatabaseCleaner[:sequel].strategy = :deletion
-  DatabaseCleaner[:sequel].db = Sequel.connect('postgres://postgres:@localhost:5432/users_development')
+  DatabaseCleaner[:sequel].db = Sequel.connect('postgres://postgres:postgres@localhost:5432/users_development')
 
   config.before(:each) do
     DatabaseCleaner[:sequel].clean
