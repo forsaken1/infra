@@ -3,3 +3,4 @@ SQLAlchemy==1.4.31
 psycopg2-binary
 Werkzeug==2.2.2
 Flask-SQLAlchemy==2.5.1
+sqlalchemy-utils==0.41.2
