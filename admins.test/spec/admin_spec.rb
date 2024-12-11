@@ -3,7 +3,7 @@ require 'database_cleaner-sequel'
 require 'sequel'
 require 'securerandom'
 
-DB = Sequel.connect('postgres://postgres:@localhost:5432/users_development')
+DB = Sequel.connect('postgres://postgres:postgres@localhost:5432/users_development')
 
 RSpec.configure do |config|
   DatabaseCleaner[:sequel].strategy = :deletion
@@ -31,6 +31,7 @@ describe 'User Management API' do
   it 'should return users' do
     User.create(
       email: 'testuser@example.com',
+      is_admin: false,
       password_hash: 'password_hash'
     )
 
