@@ -3,7 +3,7 @@ require 'database_cleaner-sequel'
 require 'sequel'
 require 'bcrypt'
 
-DB = Sequel.connect('postgres://postgres:@localhost:5432/sessions_development')
+DB = Sequel.connect('postgres://postgres:postgres@localhost:5432/sessions_development')
 
 RSpec.configure do |config|
   DatabaseCleaner[:sequel].strategy = :deletion
