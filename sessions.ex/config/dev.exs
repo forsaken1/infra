@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :sessions, Sessions.Repo,
   username: "postgres",
-  password: nil,
+  password: "postgres",
   hostname: "localhost",
   database: "sessions_development",
   stacktrace: true,
