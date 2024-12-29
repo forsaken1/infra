@@ -2,8 +2,8 @@ require 'airborne'
 require 'database_cleaner-sequel'
 require 'sequel'
 
-USERS_DB = Sequel.connect('postgres://postgres:@localhost:5432/users_development')
-SESSIONS_DB = Sequel.connect('postgres://postgres:@localhost:5432/sessions_development')
+USERS_DB = Sequel.connect('postgres://postgres:postgres@localhost:5432/users_development')
+SESSIONS_DB = Sequel.connect('postgres://postgres:postgres@localhost:5432/sessions_development')
 
 RSpec.configure do |config|
   DatabaseCleaner[:sequel, db: USERS_DB].strategy = :deletion

@@ -3,7 +3,7 @@ require 'database_cleaner-sequel'
 require 'sequel'
 require 'securerandom'
 
-DB = Sequel.connect('postgres://postgres:@localhost:5432/users_development')
+DB = Sequel.connect('postgres://postgres:postgres@localhost:5432/users_development')
 
 RSpec.configure do |config|
   DatabaseCleaner[:sequel].strategy = :deletion

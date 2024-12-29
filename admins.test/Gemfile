@@ -1,0 +1,6 @@
+source 'http://rubygems.org'
+
+gem 'airborne'
+gem 'database_cleaner-sequel'
+gem 'pg'
+gem 'sequel'
