@@ -11,11 +11,10 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - users (see [users.md](users.md))
 - sessions (see [sessions.md](sessions.md))
 - admins (see [admins.md](admins.md))
-- emails (see [emails.md](emails.md))
 
 ## Databases
 
-- Postgres
+- Postgres (see [postgres.md](postgres.md))
 
 ## Message brockers
 
@@ -34,7 +33,6 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [x] Tests (RSpec)
 - [x] Integration tests (RSpec)
 - [x] Admins service
-- [ ] Emails service
 - [ ] Swagger docs
 - [ ] Routing
 - [ ] API Gateway
