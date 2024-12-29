@@ -31,6 +31,7 @@ describe 'User Management API' do
   it 'should return users' do
     User.create(
       email: 'testuser@example.com',
+      is_admin: false,
       password_hash: 'password_hash'
     )
 
