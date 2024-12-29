@@ -34,12 +34,12 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [x] Integration tests (RSpec)
 - [x] Admins service
 - [ ] Swagger docs
-- [ ] Routing
 - [ ] API Gateway
 - [ ] UI (React)
-- [ ] UI tests (Playwright)
+- [ ] Autotests (Playwright)
 - [ ] CI (Github)
 - [ ] Log collecting (ELK)
 - [ ] Metrics & Monitoring, Alerts (Zabbix, Grafana)
-- [ ] Deployment (Docker Compose, Kubernetes)
-- [ ] Infrastructure automatization (Ansible)
+- [ ] Local infrastructure (Docker Compose)
+- [ ] Production infrastructure, Deployment (Docker Swarm, Kubernetes)
+- [ ] Infrastructure automatization (Ansible, Terraform)
