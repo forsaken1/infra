@@ -11,3 +11,9 @@ crystal sam.cr db:setup
 crystal sam.cr db:migrate
 crystal run app.cr
 ```
+
+## Build
+
+```
+docker build -t users.cr .
+```

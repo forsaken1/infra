@@ -13,7 +13,7 @@ config :sessions,
 
 # Configures the endpoint
 config :sessions, SessionsWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "0.0.0.0"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [json: SessionsWeb.ErrorJSON],
@@ -31,7 +31,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :kafka_ex,
-  brokers: [{"localhost", 9092}],
+  brokers: [{"localhost", 9094}],
   consumer_group: "sessions",
   use_ssl: false
 

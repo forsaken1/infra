@@ -2,12 +2,12 @@ require "kemal"
 require "crafka"
 require "dotenv"
 
+Dotenv.load
+
 require "../config/database"
 require "./models/user"
 require "./helpers/user_helper"
 require "./producers/new_user"
-
-Dotenv.load
 
 post "/users" do |env|
   user_params = env.params.json
