@@ -30,8 +30,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+kafka_host = System.get_env("KAFKA_HOST")
+kafka_port = String.to_integer(System.get_env("KAFKA_PORT") || "9094")
+
 config :kafka_ex,
-  brokers: [{"localhost", 9094}],
+  brokers: [{kafka_host, kafka_port}],
   consumer_group: "sessions",
   use_ssl: false
 

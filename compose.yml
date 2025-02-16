@@ -37,6 +37,11 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
     depends_on:
       - zookeeper
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   users:
     image: users.cr:latest
@@ -51,6 +56,24 @@ services:
     depends_on:
       - kafka
       - postgres
+
+  sessions:
+    image: sessions.ex:latest
+    container_name: sessions.ex
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/sessions_development
+      SECRET_KEY_BASE: SECRET_KEY_BASE
+      PHX_SERVER: true
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+    depends_on:
+      kafka:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+
 
 volumes:
   postgres-data:
