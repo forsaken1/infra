@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'byebug'
 
 EVENT_SENDING_DELAY_SEC = 1
 
