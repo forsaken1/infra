@@ -11,3 +11,9 @@ python3 app.py
 ```
 
 A database will be created automatically
+
+## Build
+
+```
+docker build -t admins.py .
+```
