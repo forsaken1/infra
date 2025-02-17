@@ -74,6 +74,17 @@ services:
       postgres:
         condition: service_started
 
+  admins:
+    image: admins.py:latest
+    container_name: admins.py
+    ports:
+      - "5001:5001"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/users_development
+      FLASK_RUN_PORT: 5001
+    depends_on:
+      - users
+
 
 volumes:
   postgres-data:
