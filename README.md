@@ -2,6 +2,8 @@
 
 The project about how to build distributed infrastructure with microservices from the scratch
 
+Detailed information about all infrastructure [here](users.md))
+
 ## Naming
 
 Directories in the root: SERVICE_NAME.LANGUAGE
@@ -40,6 +42,6 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [ ] CI (Github)
 - [ ] Log collecting (ELK)
 - [ ] Metrics & Monitoring, Alerts (Zabbix, Grafana)
-- [ ] Local infrastructure (Docker Compose)
+- [x] Local infrastructure (Docker Compose)
 - [ ] Production infrastructure, Deployment (Docker Swarm, Kubernetes)
 - [ ] Infrastructure automatization (Ansible, Terraform)
