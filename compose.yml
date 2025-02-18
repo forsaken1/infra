@@ -1,0 +1,90 @@
+version: '3.8'
+name: infra
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ALLOW_ANONYMOUS_LOGIN: yes
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka
+    container_name: kafka
+    ports:
+      - "9094:9094"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,OUTSIDE://0.0.0.0:9094
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://localhost:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+    depends_on:
+      - zookeeper
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  users:
+    image: users.cr:latest
+    container_name: users.cr
+    ports:
+      - "3000:3000"
+    environment:
+      KAFKA_URL: kafka:9092
+      BCRYPT_SALT: '1234567890123456789012345'
+      DATABASE_URI: postgres://postgres:postgres@postgres:5432/users_development
+      SESSIONS_SERVICE_URL: http://host.docker.internal:4000
+    depends_on:
+      - kafka
+      - postgres
+
+  sessions:
+    image: sessions.ex:latest
+    container_name: sessions.ex
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/sessions_development
+      SECRET_KEY_BASE: SECRET_KEY_BASE
+      PHX_SERVER: true
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+    depends_on:
+      kafka:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+
+  admins:
+    image: admins.py:latest
+    container_name: admins.py
+    ports:
+      - "5001:5001"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/users_development
+      FLASK_RUN_PORT: 5001
+    depends_on:
+      - users
+
+
+volumes:
+  postgres-data:

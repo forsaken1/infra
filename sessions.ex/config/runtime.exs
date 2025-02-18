@@ -34,7 +34,10 @@ if config_env() == :prod do
     # ssl: true,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-    socket_options: maybe_ipv6
+    socket_options: maybe_ipv6,
+    migration_timestamps: [
+      inserted_at: :created_at
+    ]
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
@@ -64,6 +67,14 @@ if config_env() == :prod do
       port: port
     ],
     secret_key_base: secret_key_base
+
+  kafka_host = System.get_env("KAFKA_HOST")
+  kafka_port = String.to_integer(System.get_env("KAFKA_PORT") || "9094")
+
+  config :kafka_ex,
+    brokers: [{kafka_host, kafka_port}],
+    consumer_group: "sessions",
+    use_ssl: false
 
   # ## SSL Support
   #
