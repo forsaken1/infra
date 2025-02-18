@@ -2,7 +2,7 @@
 
 The project about how to build distributed infrastructure with microservices from the scratch
 
-Detailed information about all infrastructure [here](users.md))
+Detailed information about all infrastructure [here](infra.md)
 
 ## Naming
 
