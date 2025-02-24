@@ -6,7 +6,7 @@ EVENT_SENDING_DELAY_SEC = 1
 describe 'Registration and Auhtentification' do
   it do
     # send request to users service to create a new user
-    post users_url("users"), {
+    post users_url('users'), {
       email: 'testuser@example.com',
       password: 'password123'
     }

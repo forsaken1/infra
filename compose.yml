@@ -1,9 +1,24 @@
 version: '3.8'
 name: infra
 services:
+  gateway:
+    image: nginx:latest
+    container_name: nginx
+    restart: on-failure
+    ports:
+      - "80:80"
+    volumes:
+      - ./gateway.nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./gateway.nginx/shared.conf:/etc/nginx/conf.d/shared.conf:ro
+    depends_on:
+      - users
+      - sessions
+      - admins
+
   postgres:
     image: postgres:latest
     container_name: postgres
+    restart: on-failure
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -15,6 +30,7 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper
     container_name: zookeeper
+    restart: on-failure
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -25,6 +41,7 @@ services:
   kafka:
     image: confluentinc/cp-kafka
     container_name: kafka
+    restart: on-failure
     ports:
       - "9094:9094"
     environment:
@@ -46,6 +63,7 @@ services:
   users:
     image: users.cr:latest
     container_name: users.cr
+    restart: on-failure
     ports:
       - "3000:3000"
     environment:
@@ -60,6 +78,7 @@ services:
   sessions:
     image: sessions.ex:latest
     container_name: sessions.ex
+    restart: on-failure
     ports:
       - "4000:4000"
     environment:
@@ -77,6 +96,7 @@ services:
   admins:
     image: admins.py:latest
     container_name: admins.py
+    restart: on-failure
     ports:
       - "5001:5001"
     environment:

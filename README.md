@@ -36,7 +36,7 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [x] Integration tests (RSpec)
 - [x] Admins service
 - [ ] Swagger docs
-- [ ] API Gateway
+- [x] API Routing
 - [ ] UI (React)
 - [ ] Autotests (Playwright)
 - [ ] CI (Github)
