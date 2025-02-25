@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Health checker' do
-  # GET /users - Check health
+  # GET /health - Check health
   it 'responds successfully' do
     get '/health'
 

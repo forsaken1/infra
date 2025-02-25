@@ -30,7 +30,7 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-kafka_host = System.get_env("KAFKA_HOST")
+kafka_host = System.get_env("KAFKA_HOST") || "localhost"
 kafka_port = String.to_integer(System.get_env("KAFKA_PORT") || "9094")
 
 config :kafka_ex,

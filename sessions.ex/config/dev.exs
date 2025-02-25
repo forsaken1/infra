@@ -2,7 +2,7 @@ import Config
 
 # Configure your database
 config :sessions, Sessions.Repo,
-  url: System.get_env("DATABASE_URL"),
+  url: System.get_env("DATABASE_URL") || "postgres://postgres:postgres@localhost:5432/sessions_development",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10,
