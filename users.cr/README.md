@@ -14,6 +14,8 @@ crystal run app.cr
 
 ## Build
 
+Check `.env` and comment all vars
+
 ```
 docker build -t users.cr .
 ```

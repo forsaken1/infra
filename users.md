@@ -17,6 +17,8 @@ users
 
 ### Without auth token
 
+GET /health - health checker
+
 POST /users - create new user (registration)
 
 ### With auth token

@@ -9,6 +9,10 @@ require "./models/user"
 require "./helpers/user_helper"
 require "./producers/new_user"
 
+get "/health" do |env|
+  { success: true }.to_json
+end
+
 post "/users" do |env|
   user_params = env.params.json
   email = user_params["email"].as(String)
