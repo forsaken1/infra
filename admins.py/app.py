@@ -34,6 +34,12 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
 
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({
+        "success": True
+    })
+
 @app.route('/users', methods=['GET'])
 def get_all_users():
     users = User.query.all()
