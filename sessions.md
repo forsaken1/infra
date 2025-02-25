@@ -15,6 +15,8 @@ sessions
 
 ### Without auth token
 
+GET /health - health checker
+
 POST /sessions - create new session (authenification)
 
 ### With auth token

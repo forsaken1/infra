@@ -8,6 +8,8 @@ Uses from users service (see [users.md](users.md))
 
 ## Methods
 
+GET /health - health checker
+
 GET /users - get all user's data
 
 GET /users/:id - get some user's data

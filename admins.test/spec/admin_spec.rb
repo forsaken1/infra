@@ -1,32 +1,6 @@
-require 'airborne'
-require 'database_cleaner-sequel'
-require 'sequel'
-require 'securerandom'
+require 'spec_helper'
 
-DB = Sequel.connect('postgres://postgres:postgres@localhost:5432/users_development')
-
-RSpec.configure do |config|
-  DatabaseCleaner[:sequel].strategy = :deletion
-  DatabaseCleaner[:sequel].db = DB
-
-  config.before(:each) do
-    DatabaseCleaner[:sequel].clean
-  end
-end
-
-Airborne.configure do |config|
-  config.base_url = 'http://localhost:5001'
-end
-
-class User < Sequel::Model(:users)
-  def before_create
-    self.uuid = SecureRandom.uuid
-    self.created_at = Time.now
-    self.updated_at = Time.now
-  end
-end
-
-describe 'User Management API' do
+describe 'Admin API' do
   # GET /users - Get user list
   it 'should return users' do
     User.create(
