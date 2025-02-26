@@ -1,6 +1,6 @@
 # Infrastructure
 
-The project about how to build distributed infrastructure with microservices from the scratch
+The project about building distributed infrastructure with microservices from the scratch
 
 Detailed information about all infrastructure [here](infra.md)
 
@@ -36,12 +36,14 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [x] Message brocker integration (Kafka)
 - [x] Tests (RSpec)
 - [x] Integration tests (RSpec)
-- [x] Admins service
-- [ ] Swagger docs
-- [x] API Routing
+- [x] Admins service (Python)
+- [ ] Relation Database Replication (PostgreSQL)
+- [ ] Distributed Database Integration (ElasticSearch)
+- [ ] API Documentation (Swagger)
+- [x] API Routing (Nginx)
 - [ ] UI (React)
-- [ ] Autotests (Playwright)
-- [ ] CI (Github)
+- [ ] UI tests (Playwright)
+- [ ] CI (Github Actions)
 - [ ] Log collecting (ELK)
 - [ ] Metrics & Monitoring, Alerts (Zabbix, Grafana)
 - [x] Local infrastructure (Docker Compose)
