@@ -22,4 +22,4 @@ RUN crystal build --release ./app.cr -o app
 EXPOSE 3000
 
 # Run the Crystal application
-CMD ["./app"]
+CMD crystal sam.cr db:setup ; ./app
