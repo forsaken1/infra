@@ -45,6 +45,7 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [ ] UI tests (Playwright)
 - [ ] CI (Github Actions)
 - [ ] Status page
+- [ ] Load balancer (Nginx)
 - [ ] Log collecting (ELK)
 - [ ] Metrics & Monitoring, Alerts (Zabbix, Grafana)
 - [x] Local infrastructure (Docker Compose)
