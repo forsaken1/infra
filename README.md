@@ -51,3 +51,5 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [x] Local infrastructure (Docker Compose)
 - [ ] Production infrastructure, Deployment (Docker Swarm, Kubernetes)
 - [ ] Infrastructure automatization (Ansible, Terraform)
+- [ ] Bug tracking (Sentry)
+- [ ] Code Storage (Gitlab)
