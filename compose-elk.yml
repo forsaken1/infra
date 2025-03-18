@@ -1,12 +1,13 @@
 version: '3.8'
-name: elk
+name: infra_elk
 services:
   elk_elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
     container_name: elk_elasticsearch
     environment:
       - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m -XX:UseSVE=0
+      - CLI_JAVA_OPTS=-XX:UseSVE=0
     ports:
       - "9201:9200"
       - "9300:9300"
