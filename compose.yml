@@ -105,6 +105,5 @@ services:
     depends_on:
       - users
 
-
 volumes:
   postgres-data:
