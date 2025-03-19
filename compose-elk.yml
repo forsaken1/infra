@@ -27,6 +27,7 @@ services:
       - "9600:9600"
     volumes:
       - ./logs.elk/logstash.conf:/etc/logstash/conf.d/logstash.conf
+      - ./logs.elk/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
     depends_on:
       - elk_elasticsearch
     networks:
