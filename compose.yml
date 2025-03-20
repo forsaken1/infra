@@ -15,9 +15,17 @@ services:
       - sessions
       - admins
 
+  statping:
+    image: statping/statping
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - statping-data:/app
+
   postgres:
     image: postgres:latest
-    container_name: postgres
+    container_name: infra_postgres
     restart: on-failure
     environment:
       POSTGRES_USER: postgres
@@ -108,3 +116,4 @@ services:
 
 volumes:
   postgres-data:
+  statping-data:
