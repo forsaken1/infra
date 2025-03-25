@@ -1,9 +1,11 @@
 # Elastic Stack
 
+There are a group of services to collect and analyse logs. 
+
 - ElasticSearch: runs on port `9200`
 - Logstash: runs on port `5044`
 - Kibana: runs on port `5601`
-- Filebeat: runs in the main infra network
+- Filebeat: reads `logs/nginx` directory
 
 ## Interations
 

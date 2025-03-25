@@ -9,4 +9,4 @@ filebeat.inputs:
     multiline.match: after
 
 output.logstash:
-  hosts: ["host.docker.internal"]
+  hosts: ["elk_logstash"]

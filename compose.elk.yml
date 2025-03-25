@@ -45,6 +45,16 @@ services:
     networks:
       - elk
 
+  elk_filebeat:
+    image: docker.elastic.co/beats/filebeat:8.5.3
+    container_name: elk_filebeat
+    restart: on-failure
+    volumes:
+      - ./logs/nginx:/usr/share/nginx/logs:ro
+      - ./config/elk/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+    networks:
+      - elk
+
 volumes:
   elk_data:
 

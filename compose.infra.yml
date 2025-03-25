@@ -16,16 +16,6 @@ services:
       - sessions
       - admins
 
-  filebeat:
-    image: docker.elastic.co/beats/filebeat:8.5.3
-    container_name: filebeat
-    restart: on-failure
-    depends_on:
-      - gateway
-    volumes:
-      - ./logs/nginx:/usr/share/nginx/logs:ro
-      - ./config/elk/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-
   postgres:
     image: postgres:latest
     container_name: postgres
