@@ -46,7 +46,7 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 - [ ] CI (Github Actions)
 - [ ] Status page
 - [ ] Load balancer (Nginx)
-- [ ] Log collecting (ELK)
+- [x] Log collecting (ELK)
 - [ ] Metrics & Monitoring, Alerts (Zabbix, Grafana)
 - [x] Local infrastructure (Docker Compose)
 - [ ] Production infrastructure, Deployment (Docker Swarm, Kubernetes)
