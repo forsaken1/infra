@@ -2,7 +2,7 @@
 
 A project about building distributed infrastructure with microservices from scratch
 
-Detailed information about all infrastructure [here](infra.md)
+Detailed information about all infrastructure [here](docs/infra.md)
 
 ## Naming
 
@@ -10,18 +10,18 @@ Directories in the root: SERVICE_NAME.LANGUAGE
 
 ## Services
 
-- users (see [users.md](users.md))
-- sessions (see [sessions.md](sessions.md))
-- admins (see [admins.md](admins.md))
+- users (see [users.md](docs/users.md))
+- sessions (see [sessions.md](docs/sessions.md))
+- admins (see [admins.md](docs/admins.md))
 
 ## Databases
 
-- Postgres (see [postgres.md](postgres.md))
-- ElasticSearch (see [elk.md](elk.md))
+- Postgres (see [postgres.md](docs/postgres.md))
+- ElasticSearch (see [elk.md](docs/elk.md))
 
 ## Message brockers
 
-- Kafka (see [kafka.md](kafka.md))
+- Kafka (see [kafka.md](docs/kafka.md))
 
 ## Interactions
 

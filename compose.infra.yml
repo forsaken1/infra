@@ -1,24 +1,24 @@
 version: '3.8'
 name: infra
 services:
-  gateway:
+  infra_gateway:
     image: nginx:latest
-    container_name: nginx
+    container_name: infra_gateway
     restart: on-failure
     ports:
       - "80:80"
     volumes:
-      - ./gateway.nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./gateway.nginx/shared.conf:/etc/nginx/conf.d/shared.conf:ro
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/nginx/shared.conf:/etc/nginx/conf.d/shared.conf:ro
       - ./logs/nginx:/var/log/nginx
     depends_on:
-      - users
-      - sessions
-      - admins
+      - infra_users
+      - infra_sessions
+      - infra_admins
 
-  postgres:
+  infra_postgres:
     image: postgres:latest
-    container_name: postgres
+    container_name: infra_postgres
     restart: on-failure
     environment:
       POSTGRES_USER: postgres
@@ -26,11 +26,11 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
-  zookeeper:
+  infra_zookeeper:
     image: confluentinc/cp-zookeeper
-    container_name: zookeeper
+    container_name: infra_zookeeper
     restart: on-failure
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -39,72 +39,72 @@ services:
     ports:
       - "2181:2181"
 
-  kafka:
+  infra_kafka:
     image: confluentinc/cp-kafka
-    container_name: kafka
+    container_name: infra_kafka
     restart: on-failure
     ports:
       - "9094:9094"
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ZOOKEEPER_CONNECT: infra_zookeeper:2181
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,OUTSIDE://0.0.0.0:9094
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://localhost:9094
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://infra_kafka:9092,OUTSIDE://localhost:9094
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
     depends_on:
-      - zookeeper
+      - infra_zookeeper
     healthcheck:
       test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  users:
+  infra_users:
     image: users.cr:latest
-    container_name: users.cr
+    container_name: infra_users
     restart: on-failure
     ports:
       - "3000:3000"
     environment:
-      KAFKA_URL: kafka:9092
+      KAFKA_URL: infra_kafka:9092
       BCRYPT_SALT: '1234567890123456789012345'
-      DATABASE_URI: postgres://postgres:postgres@postgres:5432/users_development
+      DATABASE_URI: postgres://postgres:postgres@infra_postgres:5432/users_development
       SESSIONS_SERVICE_URL: http://host.docker.internal:4000
     depends_on:
-      - kafka
-      - postgres
+      - infra_kafka
+      - infra_postgres
 
-  sessions:
+  infra_sessions:
     image: sessions.ex:latest
-    container_name: sessions.ex
+    container_name: infra_sessions
     restart: on-failure
     ports:
       - "4000:4000"
     environment:
-      DATABASE_URL: postgres://postgres:postgres@postgres:5432/sessions_development
+      DATABASE_URL: postgres://postgres:postgres@infra_postgres:5432/sessions_development
       SECRET_KEY_BASE: SECRET_KEY_BASE
       PHX_SERVER: true
-      KAFKA_HOST: kafka
+      KAFKA_HOST: infra_kafka
       KAFKA_PORT: 9092
     depends_on:
-      kafka:
+      infra_kafka:
         condition: service_healthy
-      postgres:
+      infra_postgres:
         condition: service_started
 
-  admins:
+  infra_admins:
     image: admins.py:latest
-    container_name: admins.py
+    container_name: infra_admins
     restart: on-failure
     ports:
       - "5001:5001"
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/users_development
+      DATABASE_URL: postgresql://postgres:postgres@infra_postgres:5432/users_development
       FLASK_RUN_PORT: 5001
     depends_on:
-      - users
+      - infra_users
 
 volumes:
-  postgres-data:
+  postgres_data:
