@@ -10,6 +10,7 @@ services:
     volumes:
       - ./gateway.nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./gateway.nginx/shared.conf:/etc/nginx/conf.d/shared.conf:ro
+      - ./logs/nginx:/var/log/nginx
     depends_on:
       - users
       - sessions
@@ -112,7 +113,6 @@ services:
       FLASK_RUN_PORT: 5001
     depends_on:
       - users
-
 
 volumes:
   postgres-data:
