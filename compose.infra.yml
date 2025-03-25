@@ -10,10 +10,21 @@ services:
     volumes:
       - ./gateway.nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./gateway.nginx/shared.conf:/etc/nginx/conf.d/shared.conf:ro
+      - ./logs/nginx:/var/log/nginx
     depends_on:
       - users
       - sessions
       - admins
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.5.3
+    container_name: filebeat
+    restart: on-failure
+    depends_on:
+      - gateway
+    volumes:
+      - ./logs/nginx:/usr/share/nginx/logs:ro
+      - ./config/elk/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
 
   postgres:
     image: postgres:latest

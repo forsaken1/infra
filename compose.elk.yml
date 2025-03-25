@@ -26,8 +26,8 @@ services:
       - "5000:5000/udp"
       - "9600:9600"
     volumes:
-      - ./logs.elk/logstash.conf:/etc/logstash/conf.d/logstash.conf
-      - ./logs.elk/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./config/elk/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./config/elk/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
     depends_on:
       - elk_elasticsearch
     networks:

@@ -1,0 +1,12 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /usr/share/nginx/logs/access.log
+      - /usr/share/nginx/logs/error.log
+    multiline.pattern: '^\['
+    multiline.negate: true
+    multiline.match: after
+
+output.logstash:
+  hosts: ["host.docker.internal"]
