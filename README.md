@@ -1,34 +1,18 @@
 # Infrastructure
 
-A project about building distributed infrastructure with microservices from scratch
+A project about building distributed infrastructure with microservices from scratch.
 
-Detailed information about all infrastructure [here](docs/infra.md)
+## Main services infrastructure
 
-## Naming
+Detailed information about main services infrastructure [here](docs/infra.md).
 
-Directories in the root: SERVICE_NAME.LANGUAGE
+There are a several web services that written with different languages. The services interacts with each other with requests and message broker (Kafka). They use Postgres as default database management system and each service uses its own database (with exception for dependent services). 
 
-## Services
+## ELK infrastructure
 
-- users (see [users.md](docs/users.md))
-- sessions (see [sessions.md](docs/sessions.md))
-- admins (see [admins.md](docs/admins.md))
+Detailed information about ELK instrastructure [here](docs/elk.md).
 
-## Databases
-
-- Postgres (see [postgres.md](docs/postgres.md))
-- ElasticSearch (see [elk.md](docs/elk.md))
-
-## Message brockers
-
-- Kafka (see [kafka.md](docs/kafka.md))
-
-## Interactions
-
-- `users service` creates an user in `users service` database (in `postgres`) and pushes it to `kafka`
-- `kafka` provide queues for other services
-- `sessions service` (consumer) pulls a message and creates an user in `sessions service` database
-- `admins service` uses `users service` database
+It is used as a log storage.
 
 ## TODO
 
