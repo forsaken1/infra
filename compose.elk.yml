@@ -13,7 +13,7 @@ services:
       - "9200:9200"
       - "9300:9300"
     volumes:
-      - elk_data:/usr/share/elasticsearch/data
+      - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
       - elk
 
@@ -26,8 +26,8 @@ services:
       - "5000:5000/udp"
       - "9600:9600"
     volumes:
-      - ./config/elk/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-      - ./config/elk/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./config/elk/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./config/elk/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
     depends_on:
       - elk_elasticsearch
     networks:
@@ -51,12 +51,12 @@ services:
     restart: on-failure
     volumes:
       - ./logs/nginx:/usr/share/nginx/logs:ro
-      - ./config/elk/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./config/elk/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
     networks:
       - elk
 
 volumes:
-  elk_data:
+  elasticsearch_data:
 
 networks:
   elk:
