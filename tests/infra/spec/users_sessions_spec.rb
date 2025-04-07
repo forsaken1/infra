@@ -1,10 +1,14 @@
 require 'spec_helper'
 require 'byebug'
 
-EVENT_SENDING_DELAY_SEC = 1
+KAFKA_DELAY_SEC = 1
+ELK_DELAY_SEC = 15
 
 describe 'Registration and Auhtentification' do
   it do
+    # presave logs count
+    old_logs_count = Elk::Log.count
+
     # send request to users service to create a new user
     post users_url('users'), {
       email: 'testuser@example.com',
@@ -17,7 +21,7 @@ describe 'Registration and Auhtentification' do
     expect(Users::User.where(email: 'testuser@example.com').first).not_to be_nil
 
     # waiting for event sending
-    sleep EVENT_SENDING_DELAY_SEC
+    sleep KAFKA_DELAY_SEC
 
     # check user is exist in sessions DB
     expect(Sessions::User.where(email: 'testuser@example.com').first).not_to be_nil
@@ -44,5 +48,11 @@ describe 'Registration and Auhtentification' do
     expect_status(200)
     expect_json(success: true)
     expect_json_sizes(collection: 1)
+
+    # waiting for ELK
+    sleep ELK_DELAY_SEC # TODO: progressbar for delay, clever delay: check every second
+
+    # check logs count
+    expect(Elk::Log.count).to be > old_logs_count
   end
 end

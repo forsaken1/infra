@@ -1,4 +1,3 @@
-require 'airborne'
 require 'database_cleaner-sequel'
 require 'sequel'
 
@@ -26,16 +25,4 @@ module Sessions
 
   class Session < Sequel::Model(SESSIONS_DB[:sessions])
   end
-end
-
-def users_url(path)
-  "http://localhost/users/#{path}"
-end
-
-def sessions_url(path)
-  "http://localhost/sessions/#{path}"
-end
-
-def admins_url(path)
-  "http://localhost/admins/#{path}"
 end
