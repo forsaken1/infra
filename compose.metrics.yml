@@ -1,0 +1,74 @@
+version: '3.8'
+name: infra_metrics
+services:
+  metrics_mysql:
+    image: mysql:latest
+    container_name: metrics_mysql
+    platform: linux/arm64
+    environment:
+      MYSQL_ROOT_PASSWORD: zabbix
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  metrics_zabbix_server:
+    image: zabbix/zabbix-server-mysql:alpine-6.4-latest
+    container_name: metrics_zabbix_server
+    platform: linux/arm64
+    depends_on:
+      - metrics_mysql
+    environment:
+      DB_SERVER_HOST: metrics_mysql
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix
+      MYSQL_DATABASE: zabbix
+    ports:
+      - "10051:10051"
+
+  metrics_zabbix_web:
+    image: zabbix/zabbix-web-nginx-mysql:alpine-6.4-latest
+    container_name: metrics_zabbix_web
+    platform: linux/arm64
+    depends_on:
+      - metrics_zabbix_server
+    environment:
+      DB_SERVER_HOST: metrics_mysql
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix
+      MYSQL_DATABASE: zabbix
+      ZBX_SERVER_HOST: metrics_zabbix_server
+      PHP_TZ: Europe/Moscow
+    ports:
+      - "8080:8080"
+
+  metrics_zabbix_agent:
+    image: zabbix/zabbix-agent:alpine-6.4-latest
+    container_name: metrics_zabbix_agent
+    platform: linux/arm64
+    environment:
+      ZBX_SERVER_HOST: metrics_zabbix_server
+    privileged: true
+    ports:
+      - "10050:10050"
+    volumes:
+      - /:/rootfs:ro
+
+  metrics_grafana:
+    image: grafana/grafana:latest
+    container_name: metrics_grafana
+    platform: linux/arm64
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - metrics_mysql
+
+volumes:
+  mysql_data:
+  grafana_data:
