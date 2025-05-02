@@ -2,7 +2,7 @@ version: '3.8'
 name: infra_metrics
 services:
   metrics_mysql:
-    image: mysql:latest
+    image: mysql:8.0
     container_name: metrics_mysql
     platform: linux/arm64
     environment:
@@ -60,7 +60,7 @@ services:
     container_name: metrics_grafana
     platform: linux/arm64
     ports:
-      - "3000:3000"
+      - "8081:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
