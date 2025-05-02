@@ -14,6 +14,12 @@ Detailed information about ELK instrastructure [here](docs/elk.md).
 
 It is used as a log storage.
 
+## Metrics infrastructure
+
+Detailed information about ELK instrastructure [here](docs/metrics.md).
+
+It's used for sending metrics and getting alerts.
+
 ## TODO
 
 - [x] Users service (Crystal)
